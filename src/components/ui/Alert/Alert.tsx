@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import "./alert.scss";
 import { X } from "lucide-react";
 interface IProps {
-    type: string;
+    type: "danger" | "success" | "default" | "warning" | "info";
     icon: ReactNode;
     title: string;
 }
@@ -10,7 +10,7 @@ interface IProps {
 const Alert = ({ type, icon, title }: IProps) => {
     return (
         <>
-            <div className={type}>
+            <div className={`alert-${type}`}>
                 <div className="alert-header">
                     <div className="title">
                         <span>{icon}</span>

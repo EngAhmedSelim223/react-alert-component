@@ -1,12 +1,32 @@
-$borderColor: rgba(255, 25, 0, 0.322);
-$errorBg: rgba(192, 29, 29, 0.15);
-.alert-danger {
-    border: 2px dotted $borderColor;
+@mixin alert($type) {
+    @if $type == "danger" {
+        $bg-color: rgba(255, 25, 0, 0.1) !global;
+        $border-color: rgba(255, 25, 0, 0.322) !global;
+        $text-color: #ff1900 !global;
+    } @else if $type == "success" {
+        $bg-color: rgba(0, 255, 0, 0.1) !global;
+        $border-color: rgba(0, 255, 0, 0.322) !global;
+        $text-color: #03b203 !global;
+    } @else if $type == "warning" {
+        $bg-color: rgba(255, 255, 0, 0.1) !global;
+        $border-color: rgba(255, 255, 0, 0.322) !global;
+        $text-color: #749506 !global;
+    } @else if $type == "info" {
+        $bg-color: rgba(0, 0, 255, 0.1) !global;
+        $border-color: rgba(0, 0, 255, 0.322) !global;
+        $text-color: #0000ff !global;
+    } @else {
+        $bg-color: rgba(0, 0, 0, 0.1) !global;
+        $border-color: rgba(0, 0, 0, 0.322) !global;
+        $text-color: #000000 !global;
+    }
+
+    border: 2px dotted $border-color;
     padding: 1rem;
     border-radius: 5px;
-    background-color: $errorBg;
-    color: #9c190a;
-    margin: 1rem;
+    background-color: $bg-color;
+    color: $text-color;
+    margin: 1rem 0;
 
     .alert-header {
         display: flex;
@@ -32,14 +52,29 @@ $errorBg: rgba(192, 29, 29, 0.15);
         span {
             cursor: pointer;
         }
-
-        .close {
-            cursor: pointer;
-        }
     }
 
     p {
         margin: 0;
-        color: red;
     }
+}
+
+.alert-danger {
+    @include alert("danger");
+}
+
+.alert-success {
+    @include alert("success");
+}
+
+.alert-warning {
+    @include alert("warning");
+}
+
+.alert-info {
+    @include alert("info");
+}
+
+.alert-default {
+    @include alert("default");
 }
